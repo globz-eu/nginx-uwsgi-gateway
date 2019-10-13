@@ -1,0 +1,17 @@
+upstream uwsgi_upstream {
+  server   ${APP_HOST}:${APP_PORT};
+}
+
+server {
+  listen 80 default_server;
+  server_name _;
+
+  location / {
+    uwsgi_pass uwsgi_upstream;
+    include /etc/nginx/uwsgi_params;
+  }
+
+  location /static {
+    alias /usr/nginx/html/${APP_NAME}/static;
+  }
+}
