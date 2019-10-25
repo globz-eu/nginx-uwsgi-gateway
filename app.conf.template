@@ -7,7 +7,7 @@ server {
   server_name _;
 
   location / {
-    add_header 'Access-Control-Allow-Origin' 'https://${FRONTEND_HOST}';
+    ${ALLOW_ORIGIN}
     uwsgi_pass uwsgi_upstream;
     include /etc/nginx/uwsgi_params;
   }
